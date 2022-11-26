@@ -1,5 +1,8 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:uuid/uuid.dart';
+
 
 void main() {
   runApp(
@@ -26,7 +29,19 @@ class App extends StatelessWidget {
   }
 }
 
+@immutable
+class Person {
+  final String name;
+  final int age;
+  final String uuid;
 
+  Person({
+    required this.name,
+    required this.age,
+    String? uuid,
+  }) : uuid = uuid ?? const Uuid().v4();
+
+}
 
 class HomePage extends ConsumerWidget {
   const HomePage({super.key});
@@ -36,7 +51,7 @@ class HomePage extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Personas',
+          'Home Page',
         ),
       ),
     );
